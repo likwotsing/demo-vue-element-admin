@@ -6,7 +6,7 @@
     <el-dialog :visible.sync="dialogVisible">
       <el-upload
         :multiple="true"
-        :file-list="filelist"
+        :file-list="fileList"
         :show-file-list="true"
         :on-remove="handleRemove"
         :on-success="handleSuccess"
