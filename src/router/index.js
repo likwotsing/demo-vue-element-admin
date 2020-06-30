@@ -21,7 +21,12 @@ const routes = [
   {
     path: '/tinymce',
     name: 'Tinymce',
-    component: () => import('@/views/Tinymce.vue')
+    component: () => import('@/views/component-demo/tinymce.vue')
+  },
+  {
+    path: '/markdown',
+    name: 'MarkdownEditor',
+    component: () => import('@/views/component-demo/markdown.vue')
   }
 ]
 
