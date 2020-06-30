@@ -118,7 +118,7 @@ export default {
         language: this.languageTypeList['en'],
         height: this.height,
         body_class: 'panel-body ',
-        object_resizing: true, // 是否可使用鼠标缩放图片
+        object_resizing: false, // 是否可使用鼠标缩放图片
         toolbar: this.toolbar.length > 0 ? this.toolbar : toolbar,
         menubar: this.menubar,
         plugins: plugins,
@@ -169,7 +169,7 @@ export default {
     imageSuccessCBK(arr) {
       const _this = this
       arr.forEach(c => {
-        window.tinymce.get(_this.tinymceId).insertContent(`<img class="wscnph" src="${c.url} >`)
+        window.tinymce.get(_this.tinymceId).insertContent(`<img class="wscnph" src="${c.url}" >`)
       })
     }
   }
