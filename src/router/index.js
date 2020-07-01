@@ -32,6 +32,11 @@ const routes = [
     path: '/svgicon',
     name: 'SvgIcon',
     component: () => import('@/views/icons/index.vue')
+  },
+  {
+    path: '/clipboard',
+    name: 'Clipboard',
+    component: () => import('@/views/clipboard/index.vue')
   }
 ]
 

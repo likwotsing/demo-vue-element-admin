@@ -5,7 +5,8 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/tinymce">Tinymce</router-link> |
       <router-link to="/markdown">Markdown</router-link> |
-      <router-link to="/svgicon">SvgIcon</router-link>
+      <router-link to="/svgicon">SvgIcon</router-link> |
+      <router-link to="/clipboard">Clipboard</router-link>
     </div>
     <router-view />
   </div>
