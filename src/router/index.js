@@ -37,6 +37,11 @@ const routes = [
     path: '/clipboard',
     name: 'Clipboard',
     component: () => import('@/views/clipboard/index.vue')
+  },
+  {
+    path: '/export-excel',
+    name: 'ExportExcel',
+    component: () => import('@/views/excel/export-excel.vue')
   }
 ]
 

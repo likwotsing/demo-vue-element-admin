@@ -8,7 +8,14 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 引入icon
 import './icons'
 
+import * as filters from './filters'
+
 Vue.use(ElementUI)
+
+// 注册全局过滤器
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
 
 Vue.config.productionTip = false
 
