@@ -27,6 +27,11 @@ const routes = [
     path: '/markdown',
     name: 'MarkdownEditor',
     component: () => import('@/views/component-demo/markdown.vue')
+  },
+  {
+    path: '/svgicon',
+    name: 'SvgIcon',
+    component: () => import('@/views/icons/index.vue')
   }
 ]
 

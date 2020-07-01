@@ -1,0 +1,11 @@
+# svgo.yml的配置参考：https://github.com/svg/svgo/blob/master/.svgo.yml
+
+# attrs支持的属性：https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute
+
+# 下载有多余信息的svg：https://www.easyicon.net/
+
+plugins: 
+  - removeAttrs:
+      attrs:
+#       - 'fill'
+        - 'fill-rule'
