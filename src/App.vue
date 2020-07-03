@@ -7,7 +7,10 @@
       <router-link to="/markdown">Markdown</router-link> |
       <router-link to="/svgicon">SvgIcon</router-link> |
       <router-link to="/clipboard">Clipboard</router-link> |
-      <router-link to="/export-excel">ExportExcel</router-link>
+      <router-link to="/export-excel">ExportExcel</router-link> |
+      <router-link to="/export-selected-excel">ExportSelectedExcel</router-link> |
+      <router-link to="/export-merge-header">ExportMergeHeader</router-link> |
+      <router-link to="/upload-excel">UploadExcel</router-link>
     </div>
     <router-view />
   </div>

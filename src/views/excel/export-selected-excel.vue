@@ -1,15 +1,20 @@
 <template>
   <div class="app-container">
-    <div>
-      <FilenameOption v-model="filename" />
-      <AutoWidthOption v-model="autoWidth" />
-      <BookTypeOption v-model="bookType" />
-      <el-button :loading="downloadLoading" style="margin: 0 0 20px 20px;" type="primary" icon="el-icon-document" @click="handleDownload">
-        Export Excel
-      </el-button>
-    </div>
-
-    <el-table v-loading="listLoading" :data="list" element-loading-text="Loading..." border fit highlight-current-row>
+    <el-input v-model="filename" placeholder="filename" style="width:350px;" prefix-icon="el-icon-document" />
+    <el-button :loading="downloadLoading" style="margin-bottom:20px" type="primary" icon="el-icon-document" @click="handleDownload">
+      Export Selected Items
+    </el-button>
+    <el-table
+      ref="multipleTable"
+      v-loading="listLoading"
+      :data="list"
+      element-loading-text="拼命加载中"
+      border
+      fit
+      highlight-current-row
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column type="selection" align="center" />
       <el-table-column align="center" label="Id" width="95">
         <template slot-scope="scope">
           {{ scope.$index }}
@@ -37,29 +42,17 @@
 </template>
 
 <script>
-import FilenameOption from './components/FilenameOption'
-import AutoWidthOption from './components/AutoWidthOption'
-import BookTypeOption from './components/BookTypeOption'
-
 import { fetchList } from '@/api/article'
-import { parseTime } from '@/utils'
 import moment from 'moment'
 
 export default {
-  name: 'ExportExcel',
-  components: {
-    FilenameOption,
-    AutoWidthOption,
-    BookTypeOption
-  },
   data() {
     return {
+      filename: '',
+      downloadLoading: false,
       list: null,
       listLoading: true,
-      downloadLoading: false,
-      filename: '',
-      autoWidth: true,
-      bookType: 'xlsx'
+      multipleSelection: []
     }
   },
   created() {
@@ -69,38 +62,39 @@ export default {
     fetchData() {
       this.listLoading = true
       fetchList().then(response => {
-        // 使用的的免费测试接口，不是mock的
         this.list = response.data.data
         this.listLoading = false
-      }).catch(err => console.log(err))
+      })
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val
+      console.log(this.multipleSelection)
     },
     handleDownload() {
-      this.downloadLoading = true
-      import('@/vendor/Export2Excel')
-        .then(excel => {
+      if (this.multipleSelection.length) {
+        this.downloadLoading = true
+        import('@/vendor/Export2Excel').then(excel => {
           const tHeader = ['Id', 'Title', 'Tab', 'Date']
           const filterVal = ['id', 'title', 'tab', 'create_at']
-          const list = this.list
+          const list = this.multipleSelection
           const data = this.formatJson(filterVal, list)
           excel.export_json_to_excel({
             header: tHeader,
             data,
-            filename: this.filename,
-            autoWidth: this.autoWidth,
-            bookType: this.bookType
+            filename: this.filename
           })
+          this.$refs.multipleTable.clearSelection()
           this.downloadLoading = false
         })
+      } else {
+        this.$message({
+          message: 'Please select at least one item.',
+          type: 'warning'
+        })
+      }
     },
     formatJson(filterVal, jsonData) {
-      // map: 返回值，一个由原数组每个元素执行回调函数的结果组成的新数组
-      return jsonData.map(v => filterVal.map(j => {
-        if (j === 'timestamp') {
-          return parseTime(v[j])
-        } else {
-          return v[j]
-        }
-      }))
+      return jsonData.map(c => filterVal.map(c2 => c[c2]))
     },
     momentFormatTime(time) {
       return moment(time).format('YYYY-MM-DD HH:mm')

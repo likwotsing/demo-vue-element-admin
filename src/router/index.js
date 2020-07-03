@@ -42,6 +42,21 @@ const routes = [
     path: '/export-excel',
     name: 'ExportExcel',
     component: () => import('@/views/excel/export-excel.vue')
+  },
+  {
+    path: '/export-selected-excel',
+    name: 'ExportSelectedExcel',
+    component: () => import('@/views/excel/export-selected-excel.vue')
+  },
+  {
+    path: '/export-merge-header',
+    name: 'ExportMergeHeader',
+    component: () => import('@/views/excel/export-merge-header.vue')
+  },
+  {
+    path: '/upload-excel',
+    name: 'UploadExcel',
+    component: () => import('@/views/excel/upload-excel.vue')
   }
 ]
 
