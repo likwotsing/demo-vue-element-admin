@@ -4,7 +4,9 @@ import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import axios from 'axios'
 
+import baseConf from '@/baseConf.js'
 // 引入icon
 import './icons'
 
@@ -16,6 +18,9 @@ Vue.use(ElementUI)
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
+
+Vue.prototype.$axios = axios
+Vue.prototype.$baseConf = baseConf
 
 Vue.config.productionTip = false
 

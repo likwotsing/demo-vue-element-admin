@@ -57,6 +57,11 @@ const routes = [
     path: '/upload-excel',
     name: 'UploadExcel',
     component: () => import('@/views/excel/upload-excel.vue')
+  },
+  {
+    path: '/pagination',
+    name: 'Pagination',
+    component: () => import('@/views/pagination/index.vue')
   }
 ]
 
